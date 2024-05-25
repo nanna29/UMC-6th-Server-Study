@@ -1,12 +1,10 @@
 package umc.spring.study.domain.mission;
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.study.domain.Store;
+import umc.spring.study.domain.Member;
+import umc.spring.study.domain.Mission;
 import umc.spring.study.domain.common.BaseEntity;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import umc.spring.study.domain.enums.MissionStatus;
 
 @Entity
 @Getter
@@ -21,4 +19,12 @@ public class MemberMission extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private MissionStatus status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mission_id")
+    private Mission mission;
 }
